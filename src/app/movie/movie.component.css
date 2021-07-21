@@ -2,8 +2,9 @@
     margin-top: 100px;
 }
 img {
-    width: 200px;
-    height: 200px;
+    padding: 15px;
+    width: 250px;
+    height: 250px;
 }
 
 ul {
@@ -29,10 +30,21 @@ button:hover {
 }
 
 mat-card {
+    background: #161616;
+    color: #000;
+    width: auto;
+    margin: 15px;
+}
+
+mat-card:hover{
+    color: #000;
+}
+
+mat-card-header {
     background: #0f0f0f;
     color: #000;
 }
 
-mat-card:hover h4 {
+mat-card-header:hover h4 {
     color: #000;
 }

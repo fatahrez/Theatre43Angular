@@ -6,3 +6,7 @@ img {
 p {
     color: white;
 }
+
+mat-card-content {
+    padding: 5px;
+}

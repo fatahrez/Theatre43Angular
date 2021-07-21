@@ -15,6 +15,7 @@ export class MovieComponent implements OnInit {
   color = "#fff"
   quote: any;
   movies2: any;
+
  
   constructor(
     private quoteService: QuoteService,

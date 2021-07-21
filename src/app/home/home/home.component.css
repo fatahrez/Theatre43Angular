@@ -7,6 +7,9 @@
     overflow-x: hidden;
     height: 100%;
 }
+.welcome strong {
+    color: wheat;
+}
 
 .welcome h1 {
     color: #3c4043;
