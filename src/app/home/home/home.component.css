@@ -95,3 +95,26 @@
     z-index: -10;
     opacity: 0.7;
 }
+
+@media only screen and (max-width: 1270px) {
+    #movie_svg {
+        display: none;
+    }
+
+    #circle_grey2,
+    #circle_grey2, #circle_greeny_doctor {
+      display: none;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #movie_svg {
+        display: none;
+        height: 90%;
+    }
+
+    #circle_grey2,
+    #circle_grey2, #circle_greeny_doctor {
+      display: none;
+    }
+}
