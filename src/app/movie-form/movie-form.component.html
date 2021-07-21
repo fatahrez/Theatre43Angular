@@ -1,0 +1,13 @@
+<form (ngSubmit)='submitMovie()' #movieForm='ngForm'>
+    <label for="name">name</label>
+    <input type="text" required id="name" class="" [(ngModel)]="newMovie.name" name="name" #name='ngModel'>
+    <label for="description">Description</label>
+    <input type="text" required id="description" [(ngModel)]="newMovie.description" name="description" #name='ngModel'>
+    <label for="director">Director</label>
+    <input type="text" required id="director" [(ngModel)]="newMovie.director" name="director" #name='ngModel'>
+    <label for="image">Image Url</label>
+    <input type="text" required id="image" [(ngModel)]="newMovie.image" name="image" #name='ngModel'>
+    <label for="viewDate">Premier</label>
+    <input type="date" required id="viewDate" [(ngModel)]="newMovie.viewDate" name="viewDate" #name='ngModel'>
+    <button type="submit">Add Movie</button>
+</form>

@@ -1,0 +1,15 @@
+<p>Welcome to our {{cinema}}</p>
+
+<ul *ngFor='let movie of movies2; let i = index'>
+    <mat-card-header>
+        <h3 [appHighlight]='color'>{{movie.original_title | uppercase}} </h3>
+        <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+    </mat-card-header>
+    <!-- <br>
+    <button (click)="toggleMovie(i)">Description</button>
+    <div *ngIf="movie.showDescription">
+        <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
+    </div> -->
+</ul>
+<p>{{quote.quote}}</p>
+<app-movie-form (addMovie)="addNewMovie($event)"></app-movie-form>
