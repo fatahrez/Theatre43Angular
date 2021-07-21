@@ -12,8 +12,10 @@ import { HighlightDirective } from './highlight.directive';
 import { TimePipePipe } from './time-pipe.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Material } from './material';
-import { MovieService } from './movie-service/movie.service';
 import { CoreModule } from './core/core.module';
+import { ChangeHomeDirective } from './change-home.directive';
+import { HomeModule } from './home/home.module';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { CoreModule } from './core/core.module';
     MovieDetailComponent,
     MovieFormComponent,
     HighlightDirective,
-    TimePipePipe
+    TimePipePipe,
+    ChangeHomeDirective
   ],
   imports: [
     BrowserModule,
@@ -31,9 +34,10 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     Material,
     HttpClientModule,
-    CoreModule
+    CoreModule,
+    HomeModule
   ],
-  providers: [MovieService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

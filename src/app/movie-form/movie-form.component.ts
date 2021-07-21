@@ -8,7 +8,7 @@ import { Movie } from '../movie';
 })
 export class MovieFormComponent implements OnInit {
 
-  newMovie = new Movie(0, '', '', '', [], '', new Date());
+  // newMovie = new Movie(0, '', '', '', [], '', new Date());
   @Output() addMovie = new EventEmitter<Movie>();
 
   constructor() { }
@@ -16,7 +16,7 @@ export class MovieFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitMovie() {
-    this.addMovie.emit(this.newMovie);
-  }
+  // submitMovie() {
+  //   this.addMovie.emit(this.newMovie);
+  // }
 }

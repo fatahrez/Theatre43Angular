@@ -1,15 +1,21 @@
-<p>Welcome to our {{cinema}}</p>
-<p>Watch the latest movies</p>
-<ul *ngFor='let movie of movies2; let i = index'>
-    <mat-card-header>
-        <h3 [appHighlight]='color'>{{movie.original_title | uppercase}} </h3>
-        <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
-    </mat-card-header>
-    <!-- <br>
-    <button (click)="toggleMovie(i)">Description</button>
-    <div *ngIf="movie.showDescription">
-        <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
-    </div> -->
-</ul>
-<p>{{quote.quote}}</p>
-<app-movie-form (addMovie)="addNewMovie($event)"></app-movie-form>
+<div class="container" [@fadeIn]>
+    <div class="row">
+        <div *ngFor='let movie of movies2; let i = index' class="col-md-3">
+            <mat-card>
+                <mat-card-header>
+                    <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+                    <h4 [appHighlight]='color'>{{movie.original_title}} </h4>
+                </mat-card-header>
+                <br>
+                <button mat-raised-button (click)="toggleMovie(i)">Description</button>
+                <div *ngIf="movie.showDescription">
+                    <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <p><em>{{quote.quote}}</em></p>
+
+</div>
+
+<!-- <app-movie-form (addMovie)="addNewMovie($event)"></app-movie-form> -->

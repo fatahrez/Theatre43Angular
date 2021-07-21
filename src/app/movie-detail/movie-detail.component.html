@@ -1,11 +1,6 @@
-<mat-card>
-    <img mat-card-image src="{{movie.image}}"/> 
-    <mat-card-content>
-        <p>{{movie.description}}</p>
-        <p>Directed by: {{movie.director}}</p>
-        <p><em>Premiers: </em> {{movie.viewDate | timePipe}} days</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-stroked-button color="primary" (click)='movieDelete(true)'>Delete movie</button>
-    </mat-card-actions>
-</mat-card>
+<mat-card-content>
+    <p>{{movie.overview}}</p>
+</mat-card-content>
+<mat-card-actions>
+    <button mat-stroked-button color="warn" (click)='movieDelete(true)'>Delete movie</button>
+</mat-card-actions>

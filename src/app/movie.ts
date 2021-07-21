@@ -1,6 +1,6 @@
 export class Movie {
     showDescription: boolean;
-    constructor(public id: number, public name: string, public description: string, public director: string, public stars: string[], public image: string,public viewDate: Date) {
+    constructor(public id: number, public original_title: string, public overview: string, public post_path: string) {
         this.showDescription = false;
     }
 }

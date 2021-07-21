@@ -1,4 +1,38 @@
+.container {
+    margin-top: 100px;
+}
 img {
     width: 200px;
     height: 200px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #fff;
+}
+
+button {
+    margin-left: 25px;
+    background: wheat;
+}
+
+button:hover {
+    background: #000;
+    color: wheat;
+}
+
+mat-card {
+    background: #0f0f0f;
+    color: #000;
+}
+
+mat-card:hover h4 {
+    color: #000;
 }
