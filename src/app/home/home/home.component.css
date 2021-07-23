@@ -43,7 +43,8 @@
     /* box-shadow: 0 40px 30px 1px rgba(0, 0, 0, 0.6); */
 }
 #movie_svg {
-    height: 90%;
+    height: auto;
+    width: auto;
 }
 
 #circle_greeny {

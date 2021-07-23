@@ -1,5 +1,5 @@
 <div class="container" [@fadeIn]>
-    <div class="row">
+    <div class="row flex-nowrap">
         <div *ngFor='let movie of movies2; let i = index' class="col-md-3">
             <mat-card class="mat-elevation-z4">
                 <img mat-card-image src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
