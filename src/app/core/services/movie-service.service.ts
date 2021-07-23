@@ -14,7 +14,7 @@ export class MovieServiceService {
   ) { }
 
   getMovieList(): Observable<MovieWrapper> {
-    return this.apiService.get('list/1')
+    return this.apiService.get('4/list/1')
     .pipe(tap(_ => console.log('fetched' + _)), map(data=> {
       return data;
     }));
