@@ -4,7 +4,7 @@ import { Movie } from '../movie';
 @Component({
   selector: 'app-movie-form',
   templateUrl: './movie-form.component.html',
-  styleUrls: ['./movie-form.component.css']
+  styleUrls: ['./movie-form.component.scss']
 })
 export class MovieFormComponent implements OnInit {
 

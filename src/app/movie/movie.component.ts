@@ -6,7 +6,7 @@ import { QuoteService } from '../quote-service/quote.service';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css'],
+  styleUrls: ['./movie.component.scss'],
   providers: [MovieServiceService]
 })
 export class MovieComponent implements OnInit {
