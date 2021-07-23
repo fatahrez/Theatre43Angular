@@ -1,0 +1,51 @@
+.welcome {
+  overflow-x: hidden!important;
+  margin-bottom: 100px!important;
+
+  h1 {
+    color: #3c4043;
+    font-size: 45px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 20%;
+
+    strong {
+      color: #f5deb3;
+    }
+  }
+
+  p {
+    letter-spacing: 1px;
+    font-size: 20px;
+    color: #5f6368;
+  }
+
+  .learnMoreBtn {
+    width: 180px;
+    font-weight: 600;
+    border: 2px solid #9aa289;
+    transition: all 0.3s ease;
+    color: #f5deb3;
+  }
+
+  .learnMoreBtn:hover {
+    background-color: #f5deb3;
+    color: #000;
+    /* box-shadow: 0 40px 30px 1px rgba(0, 0, 0, 0.6); */
+  }
+
+  #movie_svg {
+    height: 500px;
+  }
+}
+@media only screen and (max-width: 1270px) {
+  #movie_svg {
+    display: none;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #movie_svg {
+    display: none;
+    height: 90%;
+  }
+}

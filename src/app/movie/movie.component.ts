@@ -1,20 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NowPlayingWrapper } from '../core/models/now-playing-wrapper.model';
 import { MovieServiceService } from '../core/services/movie-service.service';
 import { NowPlayingServiceService } from '../core/services/now-playing-service.service';
 import { PopularServiceService } from '../core/services/popular-service.service';
 import { Movie } from '../movie';
 import { QuoteService } from '../quote-service/quote.service';
-import {List2Service} from '../core/services/list2.service';
-import {List3Service} from '../core/services/list3.service';
+import { List2Service } from '../core/services/list2.service';
+import { List3Service } from '../core/services/list3.service';
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css'],
+  styleUrls: ['./movie.component.scss'],
   providers: [MovieServiceService]
 })
 export class MovieComponent implements OnInit {
+
+  @ViewChild('nowPlayingContent') nowPlayingContent!: ElementRef;
+  @ViewChild('mostPopularContent') mostPopularContent!: ElementRef;
+  @ViewChild('list2Content') list2Content!: ElementRef;
+  @ViewChild('list3Content') list3Content!: ElementRef;
+
 
   cinema = 'iMax';
   color = '#fff';
@@ -27,6 +33,7 @@ export class MovieComponent implements OnInit {
   list2Movies: any;
   list3Title = '';
   list3Movies: any;
+
 
 
   constructor(
@@ -69,12 +76,20 @@ export class MovieComponent implements OnInit {
   getNowPlayingMovies(): void {
     this.nowPlayingService.getNowPlayingList().subscribe(data => {
       this.nowPlayingMovies = data.results;
+      this.nowPlayingMovies.currentPosition = 0;
+      this.nowPlayingMovies.previousPosition = 0;
+      this.checkNowPlayingScrollPosition();
+
+
     });
   }
 
   getPopularMovies(): void {
     this.popularService.getPopularList().subscribe(data => {
       this.popularMovies = data.results;
+      this.popularMovies.currentPosition = 0;
+      this.popularMovies.previousPosition = 0;
+      this.checkPopularScrollPosition();
     });
   }
 
@@ -82,6 +97,9 @@ export class MovieComponent implements OnInit {
     this.list2Service.getList2List().subscribe(data => {
       this.list2Movies = data.results;
       this.list2Title = data.name;
+      this.list2Movies.currentPosition = 0;
+      this.list2Movies.previousPosition = 0;
+      this.checkList2ScrollPosition();
     });
   }
 
@@ -89,7 +107,112 @@ export class MovieComponent implements OnInit {
     this.list3Service.getList3List().subscribe(data => {
       this.list3Movies = data.results;
       this.list3Title = data.name;
+      this.list3Movies.currentPosition = 0;
+      this.list3Movies.previousPosition = 0;
+      this.checkList3ScrollPosition();
     });
+  }
+
+
+  scrollLeft(content: any) {
+    // console.log('LEFT');
+    //
+    if (content === 'nowPlayingContent') {
+      this.nowPlayingContent.nativeElement.scrollTo({ left: (this.nowPlayingContent.nativeElement.scrollLeft + -800), behavior: 'smooth' });
+      this.checkNowPlayingScrollPosition();
+    }
+    if (content === 'mostPopularContent') {
+      this.mostPopularContent.nativeElement.scrollTo({ left: (this.mostPopularContent.nativeElement.scrollLeft + -800), behavior: 'smooth' });
+      this.checkPopularScrollPosition();
+    }
+    if (content === 'list2Content') {
+      this.list2Content.nativeElement.scrollTo({ left: (this.list2Content.nativeElement.scrollLeft + -800), behavior: 'smooth' });
+      this.checkList2ScrollPosition();
+    }
+    if (content === 'list3Content') {
+      this.list3Content.nativeElement.scrollTo({ left: (this.list3Content.nativeElement.scrollLeft + -800), behavior: 'smooth' });
+      this.checkList3ScrollPosition();
+    }
+  }
+
+  scrollRight(content: any) {
+    // console.log('RIGHT');
+
+    if (content === 'nowPlayingContent') {
+      this.nowPlayingContent.nativeElement.scrollTo({ left: (this.nowPlayingContent.nativeElement.scrollLeft + 800), behavior: 'smooth' });
+      this.checkNowPlayingScrollPosition();
+    }
+    if (content === 'mostPopularContent') {
+      this.mostPopularContent.nativeElement.scrollTo({ left: (this.mostPopularContent.nativeElement.scrollLeft + 800), behavior: 'smooth' });
+      this.checkPopularScrollPosition();
+    }
+    if (content === 'list2Content') {
+      this.list2Content.nativeElement.scrollTo({ left: (this.list2Content.nativeElement.scrollLeft + 800), behavior: 'smooth' });
+      this.checkList2ScrollPosition();
+    }
+    if (content === 'list3Content') {
+      this.list3Content.nativeElement.scrollTo({ left: (this.list3Content.nativeElement.scrollLeft + 800), behavior: 'smooth' });
+      this.checkList3ScrollPosition();
+    }
+
+  }
+
+  checkNowPlayingScrollPosition(): void {
+
+    // console.log(this.nowPlayingContent.nativeElement.scrollLeft);
+
+    this.nowPlayingMovies.previousPosition = this.nowPlayingMovies.currentPosition;
+    this.nowPlayingMovies.currentPosition = this.nowPlayingContent.nativeElement.scrollLeft;
+    // console.log('previousPosition', this.nowPlayingMovies.previousPosition);
+    // console.log('currentPosition', this.nowPlayingMovies.currentPosition);
+
+    if (this.nowPlayingMovies.previousPosition === this.nowPlayingMovies.currentPosition) {
+      this.nowPlayingContent.nativeElement.scrollTo({ left: (this.nowPlayingContent.nativeElement.scrollLeft - this.nowPlayingMovies.previousPosition), behavior: 'smooth' });
+    }
+    // console.log('nowPlayingMovies', this.nowPlayingMovies);
+
+  }
+
+  checkPopularScrollPosition(): void {
+
+    this.popularMovies.previousPosition = this.popularMovies.currentPosition;
+    this.popularMovies.currentPosition = this.mostPopularContent.nativeElement.scrollLeft;
+    // console.log('previousPosition', this.popularMovies.previousPosition);
+    // console.log('currentPosition', this.popularMovies.currentPosition);
+
+    if (this.popularMovies.previousPosition === this.popularMovies.currentPosition) {
+      this.mostPopularContent.nativeElement.scrollTo({ left: (this.mostPopularContent.nativeElement.scrollLeft - this.popularMovies.previousPosition), behavior: 'smooth' });
+    }
+    // console.log('popularMovies', this.popularMovies);
+
+  }
+
+  checkList2ScrollPosition(): void {
+
+    this.list2Movies.previousPosition = this.list2Movies.currentPosition;
+    this.list2Movies.currentPosition = this.list2Content.nativeElement.scrollLeft;
+    // console.log('previousPosition', this.list2Movies.previousPosition);
+    // console.log('currentPosition', this.list2Movies.currentPosition);
+
+    if (this.list2Movies.previousPosition === this.list2Movies.currentPosition) {
+      this.list2Content.nativeElement.scrollTo({ left: (this.list2Content.nativeElement.scrollLeft - this.list2Movies.previousPosition), behavior: 'smooth' });
+    }
+    // console.log('list2Movies', this.list2Movies);
+
+  }
+
+  checkList3ScrollPosition(): void {
+
+    this.list3Movies.previousPosition = this.list3Movies.currentPosition;
+    this.list3Movies.currentPosition = this.list3Content.nativeElement.scrollLeft;
+    // console.log('previousPosition', this.list3Movies.previousPosition);
+    // console.log('currentPosition', this.list3Movies.currentPosition);
+
+    if (this.list3Movies.previousPosition === this.list3Movies.currentPosition) {
+      this.list3Content.nativeElement.scrollTo({ left: (this.list3Content.nativeElement.scrollLeft - this.list3Movies.previousPosition), behavior: 'smooth' });
+    }
+    // console.log('list3Movies', this.list3Movies);
+
   }
 
   ngOnInit(): void {
