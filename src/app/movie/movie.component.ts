@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NowPlayingWrapper } from '../core/models/now-playing-wrapper.model';
 import { MovieServiceService } from '../core/services/movie-service.service';
 import { NowPlayingServiceService } from '../core/services/now-playing-service.service';
+import { PopularServiceService } from '../core/services/popular-service.service';
 import { Movie } from '../movie';
 import { QuoteService } from '../quote-service/quote.service';
 
@@ -19,12 +20,14 @@ export class MovieComponent implements OnInit {
   listTitle: string = '';
   movies2: any;
   nowPlayingMovies: any;
+  popularMovies: any;
 
  
   constructor(
     private quoteService: QuoteService,
     private movieServiceService: MovieServiceService,
-    private nowPlayingService: NowPlayingServiceService
+    private nowPlayingService: NowPlayingServiceService,
+    private popularService: PopularServiceService
   ) { }
   // movies = this.movieService.getMovies();
 
@@ -61,13 +64,19 @@ export class MovieComponent implements OnInit {
     })
   }
 
+  getPopularMovies(): void {
+    this.popularService.getPopularList().subscribe(data => {
+      this.popularMovies = data.results;
+    })
+  }
 
   ngOnInit() {
     this.quoteService.getQuote();
     this.quote = this.quoteService.quote;
 
-    this.getAllMovies();
     this.getNowPlayingMovies();
+    this.getPopularMovies();
+    this.getAllMovies();
   }
 
 }
