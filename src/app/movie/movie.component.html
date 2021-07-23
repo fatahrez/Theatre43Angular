@@ -1,24 +1,45 @@
-<div class="container" [@fadeIn]>
-    <div class="row flex-nowrap movie-listing">
-        <div *ngFor='let movie of movies2; let i = index' class="col-md-3">
-            <mat-card class="mat-elevation-z4">
-                <img mat-card-image src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+<div class="container">
 
-                <mat-card-header>
-                    <h4 [appHighlight]='color'>{{movie.original_title}} </h4>
-                </mat-card-header>
-                <br>
-                <button mat-raised-button (click)="toggleMovie(i)">Description</button>
-                <div *ngIf="movie.showDescription">
-                    <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
-                </div>
-            </mat-card>
-        </div>
+  <div class="list-wrap">
+    <h3>Now Playing</h3>
+    <div class="row flex-nowrap movie-listing">
+      <div *ngFor='let movie of nowPlayingMovies; let i = index' class="col-md-3">
+        <mat-card>
+          <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+
+          <mat-card-header>
+            <h4>{{movie.original_title}} </h4>
+          </mat-card-header>
+          <br>
+          <button mat-raised-button (click)="toggleMovie(i)">Description</button>
+          <div *ngIf="movie.showDescription">
+            <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
+          </div>
+        </mat-card>
+      </div>
     </div>
-    <br>
-    <p><em>{{quote.quote}}</em></p>
-    <br>
-    <br>
+  </div>
+
+  <div class="list-wrap">
+    <h3>{{listTitle}}</h3>
+    <div class="row flex-nowrap movie-listing">
+      <div *ngFor='let movie of movies2; let i = index' class="col-md-3">
+        <mat-card>
+          <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+          <mat-card-header>
+            <h4>{{movie.original_title}} </h4>
+          </mat-card-header>
+          <br>
+          <button mat-raised-button (click)="toggleMovie(i)">Description</button>
+          <div *ngIf="movie.showDescription">
+            <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- <p><em>{{quote.quote}}</em></p> -->
 </div>
 
 <!-- <app-movie-form (addMovie)="addNewMovie($event)"></app-movie-form> -->

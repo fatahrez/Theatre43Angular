@@ -6,25 +6,21 @@
 @import '../node_modules/@fortawesome/fontawesome-free/css/brands.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.css'; // WHEAT hex code- f5deb3
 
-body,
-html {
+
+body {
   margin: 0!important;
   padding: 0;
   scroll-behavior: smooth;
+  font-family: 'Quicksand', sans-serif;
   background: #121212;
   color: #fff6;
   letter-spacing: 1px!important;
 }
 
-body {
-  font-family: 'Quicksand', sans-serif;
-  overflow-x: hidden!important;
-}
-
-::selection {
-  color: #fff6;
-  background-color: #f1f1f1!important;
-}
+// ::selection {
+//   color: #fff6;
+//   background-color: #f1f1f1!important;
+// }
 
 .container-fluid {
   padding: 0;

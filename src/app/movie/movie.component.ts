@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NowPlayingWrapper } from '../core/models/now-playing-wrapper.model';
 import { MovieServiceService } from '../core/services/movie-service.service';
+import { NowPlayingServiceService } from '../core/services/now-playing-service.service';
 import { Movie } from '../movie';
 import { QuoteService } from '../quote-service/quote.service';
 
@@ -14,12 +16,15 @@ export class MovieComponent implements OnInit {
   cinema = "iMax"
   color = "#fff"
   quote: any;
+  listTitle: string = '';
   movies2: any;
+  nowPlayingMovies: any;
 
  
   constructor(
     private quoteService: QuoteService,
-    private movieServiceService: MovieServiceService
+    private movieServiceService: MovieServiceService,
+    private nowPlayingService: NowPlayingServiceService
   ) { }
   // movies = this.movieService.getMovies();
 
@@ -45,16 +50,24 @@ export class MovieComponent implements OnInit {
   getAllMovies(): void {
     this.movieServiceService.getMovieList().subscribe(data => {
       this.movies2 = data.results;
+      this.listTitle = data.name;
       console.log(this.movies2);
+    });
+  }
+
+  getNowPlayingMovies(): void {
+    this.nowPlayingService.getNowPlayingList().subscribe(data => {
+      this.nowPlayingMovies = data.results;
     })
   }
 
 
   ngOnInit() {
     this.quoteService.getQuote();
-    this.quote = this.quoteService.quote
+    this.quote = this.quoteService.quote;
 
-    this.getAllMovies()
+    this.getAllMovies();
+    this.getNowPlayingMovies();
   }
 
 }
