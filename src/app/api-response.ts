@@ -3,4 +3,4 @@ interface ApiResponse {
     author: string;
     quote: string;
     permalink: string;
-  }
+}

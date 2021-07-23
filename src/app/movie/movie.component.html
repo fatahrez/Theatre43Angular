@@ -1,45 +1,201 @@
 <div class="container">
 
+
+  <div class="spinner-div" *ngIf="!nowPlayingMovies && !popularMovies && !list2Movies && !list3Movies">
+    <div class="fancy-spinner">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
   <div class="list-wrap">
-    <h3>Now Playing</h3>
-    <div class="row flex-nowrap movie-listing">
-      <div *ngFor='let movie of nowPlayingMovies; let i = index' class="col-md-3">
+    <div class="row" *ngIf="nowPlayingMovies">
+      <div class="col-md-8">
+        <h3>Now Playing</h3>
+
+      </div>
+      <div class="col-md-4">
+        <div class="scroll-btns">
+          <button (click)="scrollLeft('nowPlayingContent')" class="btn btn-left"><span><i class="fas fa-chevron-left"></i></span></button>
+          <button (click)="scrollRight('nowPlayingContent')" class="btn btn-right"><span><i class="fas fa-chevron-right"></i></span></button>
+        </div>
+      </div>
+    </div>
+    <div class="row flex-nowrap movie-listing" #nowPlayingContent>
+      <div *ngFor='let movie of nowPlayingMovies; let i = index' class="col-md-2">
         <mat-card>
           <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
 
-          <mat-card-header>
-            <h4>{{movie.original_title}} </h4>
-          </mat-card-header>
-          <br>
+          <div class="row basic-info">
+            <div class="col-4 col-md-4">
+              <span class="d-block">
+                <span class="d-inline"><i class="fas fa-star"></i></span>
+                <span class="d-inline">{{movie.vote_average}}</span>
+              </span>
+            </div>
+            <div class="col-8 col-md-8">
+              <span class="d-block">
+                <span class="d-inline"><i class="fas fa-calendar"></i></span>
+                <span class="d-inline">{{movie.release_date | date : 'MMM y'}}</span>
+              </span>
+            </div>
+          </div>
+
+
+          <h4>{{movie.original_title}} </h4>
+
+          <!-- <br>
           <button mat-raised-button (click)="toggleMovie(i)">Description</button>
           <div *ngIf="movie.showDescription">
             <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
-          </div>
+          </div> -->
         </mat-card>
       </div>
     </div>
   </div>
 
   <div class="list-wrap">
-    <h3>{{listTitle}}</h3>
-    <div class="row flex-nowrap movie-listing">
-      <div *ngFor='let movie of movies2; let i = index' class="col-md-3">
+    <div class="row" *ngIf="popularMovies">
+      <div class="col-md-8">
+        <h3>Most Popular</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="scroll-btns">
+          <button (click)="scrollLeft('mostPopularContent')" class="btn btn-left"><span><i class="fas fa-chevron-left"></i></span></button>
+          <button (click)="scrollRight('mostPopularContent')" class="btn btn-right"><span><i class="fas fa-chevron-right"></i></span></button>
+
+        </div>
+      </div>
+    </div>
+    <div class="row flex-nowrap movie-listing" #mostPopularContent>
+      <div *ngFor='let movie of popularMovies; let i = index' class="col-md-2">
         <mat-card>
           <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
-          <mat-card-header>
-            <h4>{{movie.original_title}} </h4>
-          </mat-card-header>
-          <br>
+
+          <div class="row basic-info">
+            <div class="col-4 col-md-4">
+              <span class="d-block">
+                <span class="d-inline"><i class="fas fa-star"></i></span>
+                <span class="d-inline">{{movie.vote_average}}</span>
+              </span>
+            </div>
+            <div class="col-8 col-md-8">
+              <span class="d-block">
+                <span class="d-inline"><i class="fas fa-calendar"></i></span>
+                <span class="d-inline">{{movie.release_date | date : 'MMM y'}}</span>
+              </span>
+            </div>
+          </div>
+
+
+          <h4>{{movie.original_title}} </h4>
+
+          <!-- <br>
           <button mat-raised-button (click)="toggleMovie(i)">Description</button>
           <div *ngIf="movie.showDescription">
             <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
-          </div>
+          </div> -->
         </mat-card>
       </div>
     </div>
   </div>
 
-  <!-- <p><em>{{quote.quote}}</em></p> -->
+  <div class="list-wrap">
+    <div class="row" *ngIf="list2Movies">
+      <div class="col-md-8">
+        <h3>{{list2Title}}</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="scroll-btns">
+          <button (click)="scrollLeft('list2Content')" class="btn btn-left"><span><i class="fas fa-chevron-left"></i></span></button>
+          <button (click)="scrollRight('list2Content')" class="btn btn-right"><span><i class="fas fa-chevron-right"></i></span></button>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row flex-nowrap movie-listing" #list2Content>
+      <div *ngFor='let movie of list2Movies; let i = index' class="col-md-2">
+        <mat-card>
+          <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+
+          <div class="row basic-info">
+            <div class="col-4 col-md-4">
+              <span class="d-block">
+                <span class="d-inline"><i class="fas fa-star"></i></span>
+                <span class="d-inline">{{movie.vote_average}}</span>
+              </span>
+            </div>
+            <div class="col-8 col-md-8">
+              <span class="d-block">
+                <span class="d-inline"><i class="fas fa-calendar"></i></span>
+                <span class="d-inline">{{movie.release_date | date : 'MMM y'}}</span>
+              </span>
+            </div>
+          </div>
+
+
+          <h4>{{movie.original_title}} </h4>
+
+          <!-- <br>
+          <button mat-raised-button (click)="toggleMovie(i)">Description</button>
+          <div *ngIf="movie.showDescription">
+            <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
+          </div> -->
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="list-wrap">
+    <div class="row" *ngIf="list3Movies">
+      <div class="col-md-8">
+        <h3>{{list3Title}}</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="scroll-btns">
+          <button (click)="scrollLeft('list3Content')" class="btn btn-left"><span><i class="fas fa-chevron-left"></i></span></button>
+          <button (click)="scrollRight('list3Content')" class="btn btn-right"><span><i class="fas fa-chevron-right"></i></span></button>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row flex-nowrap movie-listing" #list3Content>
+      <div *ngFor='let movie of list3Movies; let i = index' class="col-md-2">
+        <mat-card>
+          <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+
+          <div class="row basic-info">
+            <div class="col-4 col-md-4">
+              <span class="d-block">
+                <span class="d-inline"><i class="fas fa-star"></i></span>
+                <span class="d-inline">{{movie.vote_average}}</span>
+              </span>
+            </div>
+            <div class="col-8 col-md-8">
+              <span class="d-block">
+                <span class="d-inline"><i class="fas fa-calendar"></i></span>
+                <span class="d-inline">{{movie.release_date | date : 'MMM y'}}</span>
+              </span>
+            </div>
+          </div>
+
+
+          <h4>{{movie.original_title}} </h4>
+
+          <!-- <br>
+          <button mat-raised-button (click)="toggleMovie(i)">Description</button>
+          <div *ngIf="movie.showDescription">
+            <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
+          </div> -->
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <p><em>{{quote.quote}}</em></p>
 </div>
 
 <!-- <app-movie-form (addMovie)="addNewMovie($event)"></app-movie-form> -->
