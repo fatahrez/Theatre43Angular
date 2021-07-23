@@ -1,54 +1,55 @@
 .container {
-    margin-top: 100px;
-}
-img {
-    padding: 15px;
-    width: 250px;
-    height: 250px;
+  margin-top: 100px;
 }
 
-.row {
-    overflow-x: scroll;
+img {
+  padding: 15px;
+  width: 250px;
+  height: 250px;
+}
+
+.movie-listing {
+  overflow-x: scroll;
 }
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 h4 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: #fff;
 }
 
 button {
-    margin-left: 25px;
-    background: wheat;
+  margin-left: 25px;
+  background: #f5deb3;
 }
 
 button:hover {
-    background: #000;
-    color: wheat;
+  background: #000;
+  color: #f5deb3;
 }
 
 mat-card {
-    background: #161616;
-    color: #000;
-    width: auto;
-    margin: 15px;
+  background: #161616;
+  color: #000;
+  width: auto;
+  margin: 15px;
 }
 
-mat-card:hover{
-    color: #000;
+mat-card:hover {
+  color: #000;
 }
 
 mat-card-header {
-    background: #0f0f0f;
-    color: #000;
+  background: #0f0f0f;
+  color: #000;
 }
 
 mat-card-header:hover h4 {
-    color: #000;
+  color: #000;
 }
