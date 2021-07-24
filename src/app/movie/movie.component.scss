@@ -110,6 +110,18 @@
         background: #000;
         color: #f5deb3;
       }
+
+      .play-movie {
+        display: none;
+      }
+
+      &:hover {
+        .play-movie {
+          display: inline;
+        }
+    }
+
+
     }
   }
 

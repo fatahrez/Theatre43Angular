@@ -15,6 +15,8 @@ import { Material } from './material';
 import { CoreModule } from './core/core.module';
 import { ChangeHomeDirective } from './change-home.directive';
 import { HomeModule } from './home/home.module';
+import { YoutubeComponent } from './youtube/youtube.component';
+import {SafePipe} from './safe-pipe.pipe';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { HomeModule } from './home/home.module';
     MovieFormComponent,
     HighlightDirective,
     TimePipePipe,
-    ChangeHomeDirective
+    ChangeHomeDirective,
+    YoutubeComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

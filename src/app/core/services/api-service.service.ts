@@ -13,12 +13,13 @@ export class ApiServiceService {
     private http: HttpClient) { }
 
 
-  private formatErrors(error: any) {
+  private formatErrors(error: any): Observable<any> {
     return throwError(error.json);
   }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(`${environment.moviedb_api_url}${path}`+ '?api_key=' + `${environment.api_key}`, {params})
-    .pipe(catchError(this.formatErrors))
+    return this.http.get(`${environment.moviedb_api_url}${path}` + '?api_key=' + `${environment.api_key}`, {params})
+    .pipe(catchError(this.formatErrors));
   }
+
 }

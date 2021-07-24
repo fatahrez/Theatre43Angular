@@ -1,6 +1,5 @@
 <div class="container">
 
-
   <div class="spinner-div" *ngIf="!nowPlayingMovies && !popularMovies && !list2Movies && !list3Movies">
     <div class="fancy-spinner">
       <div class="ring"></div>
@@ -26,7 +25,9 @@
       <div *ngFor='let movie of nowPlayingMovies; let i = index' class="col-md-2">
         <mat-card>
           <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
-
+          <div class="play-movie">
+            <app-youtube [movie]="movie"></app-youtube>
+          </div>
           <div class="row basic-info">
             <div class="col-4 col-md-4">
               <span class="d-block">
