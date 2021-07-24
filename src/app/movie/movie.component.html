@@ -25,9 +25,7 @@
       <div *ngFor='let movie of nowPlayingMovies; let i = index' class="col-md-2">
         <mat-card>
           <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
-          <div class="play-movie">
-            <app-youtube [movie]="movie"></app-youtube>
-          </div>
+          <app-youtube [movie]="movie"  class="play-movie"></app-youtube>
           <div class="row basic-info">
             <div class="col-4 col-md-4">
               <span class="d-block">

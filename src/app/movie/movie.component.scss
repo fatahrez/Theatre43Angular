@@ -65,6 +65,15 @@
       margin: 15px 0;
       font-family: 'Quicksand', sans-serif!important;
 
+      app-youtube {
+        display: none;
+      }
+      &:hover {
+        app-youtube {
+          display: block;
+        }
+      }
+
       .basic-info {
         margin-top: 10px;
 
@@ -111,18 +120,8 @@
         color: #f5deb3;
       }
 
-      .play-movie {
-        display: none;
-      }
-
-      &:hover {
-        .play-movie {
-          display: inline;
-        }
     }
 
-
-    }
   }
 
   .movie-listing::-webkit-scrollbar {

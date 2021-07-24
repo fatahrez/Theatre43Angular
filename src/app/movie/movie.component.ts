@@ -52,6 +52,10 @@ export class MovieComponent implements OnInit {
     this.movies2[index].showDescription = !this.movies2[index].showDescription;
   }
 
+  playMovie(index: any, movie: any): void {
+    movie[index].playMovie = !movie[index].playMovie;
+  }
+
   deleteMovie(isPremierTimeOver: any, index: any): void {
     if (isPremierTimeOver) {
       const toDelete = confirm('Are you sure you want to delete this movie');
