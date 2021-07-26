@@ -57,6 +57,37 @@
 
     .col-md-2 {
       padding: 0;
+      position: relative;
+      overflow-x: visible;
+    }
+
+    .youtube-frame {
+      position: absolute;
+      top: 0;
+      left: -70px;
+      z-index: 100;
+      width: 400px;
+      background-color: #454242;
+      border-radius: 20px;
+
+      iframe {
+        width: 100%;
+        height: 240px;
+      }
+
+      p {
+        color: #fff;
+        margin: 10px;
+        font-size: 14px;
+      }
+    }
+
+    .col-md-2:first-child {
+      .youtube-frame {
+        position: absolute;
+        right: auto;
+        left: 20px!important;
+      }
     }
 
     mat-card {
@@ -64,15 +95,7 @@
       color: #fff;
       margin: 15px 0;
       font-family: 'Quicksand', sans-serif!important;
-
-      app-youtube {
-        display: none;
-      }
-      &:hover {
-        app-youtube {
-          display: block;
-        }
-      }
+      cursor: pointer;
 
       .basic-info {
         margin-top: 10px;
@@ -82,7 +105,6 @@
           color: #f5deb3!important;
           padding-right: 5px;
           vertical-align: middle;
-
         }
 
         span {
@@ -119,9 +141,7 @@
         background: #000;
         color: #f5deb3;
       }
-
     }
-
   }
 
   .movie-listing::-webkit-scrollbar {
