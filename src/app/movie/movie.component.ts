@@ -150,7 +150,7 @@ export class MovieComponent implements OnInit {
     this.finalLink = '';
     this.youtubeService.getYoutubeSearchList(movie).subscribe(data => {
       this.youtubeLink = data.results[0].key;
-      this.finalLink = 'https://www.youtube.com/embed/' + this.youtubeLink + '?autoplay=1&start=0&showinfo=1&controls=0';
+      this.finalLink = 'https://www.youtube.com/embed/' + this.youtubeLink + '?autoplay=1&start=0&showinfo=1&controls=0&loop=1&playlist=' + this.youtubeLink;
       this.movieId = movie;
 
       // console.log(this.finalLink);
