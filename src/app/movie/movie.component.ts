@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef, Input} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { NowPlayingWrapper } from '../core/models/now-playing-wrapper.model';
 import { MovieServiceService } from '../core/services/movie-service.service';
 import { NowPlayingServiceService } from '../core/services/now-playing-service.service';
@@ -7,12 +7,30 @@ import { Movie } from '../movie';
 import { QuoteService } from '../quote-service/quote.service';
 import { List2Service } from '../core/services/list2.service';
 import { List3Service } from '../core/services/list3.service';
+import { YoutubeService } from '../core/services/youtube.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { style, state, animate, transition, trigger } from '@angular/animations';
+
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.scss'],
-  providers: [MovieServiceService]
+  providers: [MovieServiceService],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({ opacity: 0 }),
+        animate(600, style({ opacity: 1 }))
+      ])
+    ]),
+    trigger('fadeInOut', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({ opacity: 0, transform: 'scale(0.5)' }),
+        animate('300ms ease', style({ opacity: 1, transform: 'scale(1)' }))
+      ])
+    ])
+  ]
 })
 export class MovieComponent implements OnInit {
 
@@ -35,6 +53,9 @@ export class MovieComponent implements OnInit {
   list2Movies: any;
   list3Title = '';
   list3Movies: any;
+  youtubeLink = '';
+  finalLink = '';
+  movieId = '';
 
 
 
@@ -44,7 +65,9 @@ export class MovieComponent implements OnInit {
     private nowPlayingService: NowPlayingServiceService,
     private popularService: PopularServiceService,
     private list2Service: List2Service,
-    private list3Service: List3Service
+    private list3Service: List3Service,
+    private youtubeService: YoutubeService,
+    private sanitizer: DomSanitizer
   ) { }
   // movies = this.movieService.getMovies();
 
@@ -75,13 +98,17 @@ export class MovieComponent implements OnInit {
     this.movieServiceService.getMovieList().subscribe(data => {
       this.movies2 = data.results;
       this.listTitle = data.name;
-      console.log(this.movies2);
+      // console.log(this.movies2);
     });
   }
 
   getNowPlayingMovies(): void {
     this.nowPlayingService.getNowPlayingList().subscribe(data => {
       this.nowPlayingMovies = data.results;
+      // this.nowPlayingMovies.forEach((movie: any) => {
+      // movie = this.getYoutubeLink(movie);
+      // console.log('finalLink', movie);
+      // });
       this.nowPlayingMovies.currentPosition = 0;
       this.nowPlayingMovies.previousPosition = 0;
       this.checkNowPlayingScrollPosition();
@@ -119,6 +146,27 @@ export class MovieComponent implements OnInit {
     });
   }
 
+  getYoutubeLink(movie: any) {
+    this.finalLink = '';
+    this.youtubeService.getYoutubeSearchList(movie).subscribe(data => {
+      this.youtubeLink = data.results[0].key;
+      this.finalLink = 'https://www.youtube.com/embed/' + this.youtubeLink + '?autoplay=1&start=0&showinfo=1&controls=0&loop=1&playlist=' + this.youtubeLink;
+      this.movieId = movie;
+
+      // console.log(this.finalLink);
+
+    });
+
+    // return movie;
+
+
+  }
+
+  clear(): void {
+    this.finalLink = '';
+    this.movieId = '';
+  }
+
 
   scrollLeft(content: any): void {
     // console.log('LEFT');
@@ -128,8 +176,10 @@ export class MovieComponent implements OnInit {
       this.checkNowPlayingScrollPosition();
     }
     if (content === 'mostPopularContent') {
-      this.mostPopularContent.nativeElement.scrollTo({ left: (this.mostPopularContent.nativeElement.scrollLeft + -800),
-        behavior: 'smooth' });
+      this.mostPopularContent.nativeElement.scrollTo({
+        left: (this.mostPopularContent.nativeElement.scrollLeft + -800),
+        behavior: 'smooth'
+      });
       this.checkPopularScrollPosition();
     }
     if (content === 'list2Content') {
@@ -150,8 +200,10 @@ export class MovieComponent implements OnInit {
       this.checkNowPlayingScrollPosition();
     }
     if (content === 'mostPopularContent') {
-      this.mostPopularContent.nativeElement.scrollTo({ left: (this.mostPopularContent.nativeElement.scrollLeft + 800),
-        behavior: 'smooth' });
+      this.mostPopularContent.nativeElement.scrollTo({
+        left: (this.mostPopularContent.nativeElement.scrollLeft + 800),
+        behavior: 'smooth'
+      });
       this.checkPopularScrollPosition();
     }
     if (content === 'list2Content') {
@@ -175,8 +227,10 @@ export class MovieComponent implements OnInit {
     // console.log('currentPosition', this.nowPlayingMovies.currentPosition);
 
     if (this.nowPlayingMovies.previousPosition === this.nowPlayingMovies.currentPosition) {
-      this.nowPlayingContent.nativeElement.scrollTo({ left: (this.nowPlayingContent.nativeElement.scrollLeft -
-          this.nowPlayingMovies.previousPosition), behavior: 'smooth' });
+      this.nowPlayingContent.nativeElement.scrollTo({
+        left: (this.nowPlayingContent.nativeElement.scrollLeft -
+          this.nowPlayingMovies.previousPosition), behavior: 'smooth'
+      });
     }
     // console.log('nowPlayingMovies', this.nowPlayingMovies);
 
@@ -190,8 +244,10 @@ export class MovieComponent implements OnInit {
     // console.log('currentPosition', this.popularMovies.currentPosition);
 
     if (this.popularMovies.previousPosition === this.popularMovies.currentPosition) {
-      this.mostPopularContent.nativeElement.scrollTo({ left: (this.mostPopularContent.nativeElement.scrollLeft -
-          this.popularMovies.previousPosition), behavior: 'smooth' });
+      this.mostPopularContent.nativeElement.scrollTo({
+        left: (this.mostPopularContent.nativeElement.scrollLeft -
+          this.popularMovies.previousPosition), behavior: 'smooth'
+      });
     }
     // console.log('popularMovies', this.popularMovies);
 
@@ -205,8 +261,10 @@ export class MovieComponent implements OnInit {
     // console.log('currentPosition', this.list2Movies.currentPosition);
 
     if (this.list2Movies.previousPosition === this.list2Movies.currentPosition) {
-      this.list2Content.nativeElement.scrollTo({ left: (this.list2Content.nativeElement.scrollLeft - this.list2Movies.previousPosition),
-        behavior: 'smooth' });
+      this.list2Content.nativeElement.scrollTo({
+        left: (this.list2Content.nativeElement.scrollLeft - this.list2Movies.previousPosition),
+        behavior: 'smooth'
+      });
     }
     // console.log('list2Movies', this.list2Movies);
 
@@ -220,8 +278,10 @@ export class MovieComponent implements OnInit {
     // console.log('currentPosition', this.list3Movies.currentPosition);
 
     if (this.list3Movies.previousPosition === this.list3Movies.currentPosition) {
-      this.list3Content.nativeElement.scrollTo({ left: (this.list3Content.nativeElement.scrollLeft - this.list3Movies.previousPosition),
-        behavior: 'smooth' });
+      this.list3Content.nativeElement.scrollTo({
+        left: (this.list3Content.nativeElement.scrollLeft - this.list3Movies.previousPosition),
+        behavior: 'smooth'
+      });
     }
     // console.log('list3Movies', this.list3Movies);
 

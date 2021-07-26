@@ -12,7 +12,6 @@
     <div class="row" *ngIf="nowPlayingMovies">
       <div class="col-md-8">
         <h3>Now Playing</h3>
-
       </div>
       <div class="col-md-4">
         <div class="scroll-btns">
@@ -23,9 +22,16 @@
     </div>
     <div class="row flex-nowrap movie-listing" #nowPlayingContent>
       <div *ngFor='let movie of nowPlayingMovies; let i = index' class="col-md-2">
-        <mat-card>
+
+        <div class="youtube-frame" [@fadeInOut] *ngIf="finalLink && movieId === movie.id">
+          <iframe [src]="finalLink | safePipe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen autoplay>
+          </iframe>
+          <p>{{movie.overview | slice :0 : 300}} {{movie?.overview?.length > 300 ? '&hellip;':' '}}</p>
+        </div>
+
+        <mat-card (mouseenter)="getYoutubeLink(movie.id)">
           <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
-          <app-youtube [movie]="movie"></app-youtube>
+          <!-- <app-youtube [movie]="movie"></app-youtube> -->
           <div class="row basic-info">
             <div class="col-4 col-md-4">
               <span class="d-block">
@@ -50,7 +56,11 @@
             <app-movie-detail [movie]='movie' (isPremierTimeOver)='deleteMovie($event, i)'></app-movie-detail>
           </div> -->
         </mat-card>
+
       </div>
+
+
+
     </div>
   </div>
 
