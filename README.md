@@ -1,6 +1,6 @@
-# Movies
+# Theatre43
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
+This project is created using [themoviedb API](https://developers.themoviedb.org/3). 
 
 ## Development server
 
